@@ -1,0 +1,8 @@
+# Folders
+/.idea/
+/configuration/
+/node_modules/
+
+# Files
+/package-lock.json
+/public_html/assets/js/main.js
