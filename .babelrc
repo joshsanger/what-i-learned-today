@@ -1,0 +1,13 @@
+{
+	"presets": [
+		"es2015",
+		"env",
+		"react"
+	],
+	"plugins": [
+		"transform-class-properties",
+		"transform-builtin-extend",
+		"transform-eval",
+		"transform-object-rest-spread"
+	]
+}

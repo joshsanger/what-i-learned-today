@@ -1,0 +1,117 @@
+@import './mixins';
+@import './reset';
+@import './global';
+
+body,
+html {
+    height: 100%;
+}
+#app {
+    height: 100%;
+    & > div {
+        &:first-child {
+            min-height: 100%;
+            padding-bottom: 60px;
+            & > div {
+                width: 100%;
+                text-align: center;
+            }
+        }
+        &:last-child {
+            text-align: center;
+            margin-top: -60px;
+            height: 60px;
+            & span {
+                cursor: pointer;
+                color: @black;
+                font-weight: 400;
+                line-height: 60px;
+                text-decoration: none;
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
+        }
+    }
+}
+#top {
+    height: 250px;
+    & > div {
+        padding: 0 75px;
+    }
+    & > span {
+        height: 75px;
+        width: 75px;
+        background: transparent;
+        .trans(all, 0.3s);
+        .flex-container();
+        .align-items(center);
+        .justify-content(center);
+        border-radius: 50%;
+        &:not(.disabled) {
+            cursor: pointer;
+        }
+        &.disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+        & i {
+            font-size: 30px;
+        }
+        &:not(.disabled):hover {
+            background: fade(@black, 8%);
+        }
+    }
+    & #day {
+        margin-bottom: 10px;
+        font-size: 60px;
+        display: block;
+        line-height: 1em;
+    }
+    & #month {
+        text-transform: uppercase;
+        font-size: 95px;
+        font-weight: 100;
+        display: block;
+        line-height: 1em;
+    }
+}
+#learn {
+    .flex-container();
+    .justify-content(center);
+    .flex(1 1 auto);
+    text-align: center;
+    padding: 45px 20px 45px 20px;
+    & > div {
+        width: 100%;
+        max-width: 700px;
+        margin: 0 auto;
+    }
+    & h1 {
+        font-size: 20px;
+        font-weight: 500;
+        margin-bottom: 25px;
+    }
+    & p {
+        font-size: 17px;
+        font-weight: 400;
+        line-height: 1.8em;
+    }
+    & a {
+        background: fade(@black, 8%);
+        display: inline-block;
+        padding: 0 40px;
+        line-height: 44px;
+        height: 44px;
+        border-radius: 22px;
+        margin-top: 25px;
+        text-decoration: none;
+        font-weight: 500;
+        font-size: 16px;
+        color: @black;
+        .trans(all, 0.3s);
+        &:hover {
+            background: fade(@black, 15%);
+        }
+    }
+}
