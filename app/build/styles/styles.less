@@ -6,6 +6,9 @@ body,
 html {
     height: 100%;
 }
+#color-wrap {
+    .trans(background, 0.3s);
+}
 #app {
     height: 100%;
     & > div {
@@ -36,6 +39,7 @@ html {
 }
 #top {
     height: 250px;
+    padding: 0 20px;
     & > div {
         padding: 0 75px;
     }
@@ -112,6 +116,66 @@ html {
         .trans(all, 0.3s);
         &:hover {
             background: fade(@black, 15%);
+        }
+    }
+}
+@media screen and (max-width: 620px) {
+    #top {
+        height: 175px;
+        padding: 0 20px;
+        & > div {
+            padding: 0 20px;
+        }
+        & > span {
+            height: 44px;
+            width: 44px;
+            .flex(0 0 auto);
+            & i {
+                font-size: 20px;
+            }
+        }
+        & #day {
+            margin-bottom: 8px;
+            font-size: 40px;
+        }
+        & #month {
+            font-size: 60px;
+        }
+    }
+    #learn {
+        .flex-container();
+        .justify-content(center);
+        .flex(1 1 auto);
+        text-align: center;
+        padding: 25px 20px;
+        & h1 {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+        & p {
+            font-size: 15px;
+            line-height: 1.6em;
+        }
+        & a {
+            font-size: 14px;
+        }
+    }
+    #app {
+        height: 100%;
+        & > div {
+            &:first-child {
+                min-height: 100%;
+                padding-bottom: 60px;
+                & > div {
+                    width: 100%;
+                    text-align: center;
+                }
+            }
+            &:last-child {
+                & span {
+                    font-size: 15px;
+                }
+            }
         }
     }
 }

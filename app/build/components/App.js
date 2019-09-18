@@ -70,7 +70,7 @@ class App extends Component {
     render() {
         return (
             <Fragment>
-                <div style={{background: (this.state.data && this.state.data.color ? this.state.data.color : '#8393ca')}}>
+                <div id="color-wrap" style={{background: (this.state.data && this.state.data.color ? this.state.data.color : '#8393ca')}}>
                     <Top data={this.state.data} fetchData={(direction) => {this.fetchData(direction)}}/>
                     <Learn data={this.state.data} />
                 </div>
