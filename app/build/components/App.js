@@ -12,21 +12,38 @@ class App extends Component {
         this.state = {
             data    : false,
             fetching: true,
-            error: false
+            error: false,
+            currentItem: 0,
+            left: true,
+            right: false
         };
     }
 
 
-    fetchData = async (direction = false) => {
+    switchItems = (direction = 'left') => {
+
+        let currentItem;
+
+        if (direction == 'left') {
+            currentItem = this.state.currentItem - 1;
+        } else {
+            currentItem = this.state.currentItem + 1;
+        }
+
+        this.setState({
+            left: !(currentItem <= 0),
+            right: !(currentItem >= (this.state.data.length - 1)),
+            currentItem
+        });
+
+    }
+
+    fetchData = async () => {
 
         try {
 
             const response = await fetch('api/fetch-date.php', {
-                method: 'POST',
-                body: JSON.stringify({
-                    date : (!!direction && this.state.data.date ? this.state.data.date : new Date()),
-                    direction
-                }),
+                method: 'GET',
                 headers:{
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
@@ -39,7 +56,10 @@ class App extends Component {
             }
 
             this.setState({
-                data: data.data
+                data: data.data,
+                currentItem: (data.data.length - 1),
+                left: (data.data.length > 1),
+                right: false
             })
 
         } catch (e) {
@@ -52,7 +72,10 @@ class App extends Component {
 
             this.setState({
                 error: theError
-            })
+            });
+
+            console.log(theError);
+
 
         } finally {
             this.setState({
@@ -68,11 +91,23 @@ class App extends Component {
     }
 
     render() {
+        if (this.state.fetching) {
+            return (
+                <div id="color-wrap" style={{background: '#ffffff'}}>
+
+                </div>
+            );
+        }
+
+        const current = this.state.data[this.state.currentItem];
+
+        console.log(this.state);
+
         return (
             <Fragment>
-                <div id="color-wrap" style={{background: (this.state.data && this.state.data.color ? this.state.data.color : '#8393ca')}}>
-                    <Top data={this.state.data} fetchData={(direction) => {this.fetchData(direction)}}/>
-                    <Learn data={this.state.data} />
+                <div id="color-wrap" style={{background: ((current && current.color) ? current.color : '#8393ca')}}>
+                    <Top data={current} switchItems={(direction) => {this.switchItems(direction)}} left={this.state.left} right={this.state.right}/>
+                    <Learn data={current} />
                 </div>
                 <Footer />
             </Fragment>
