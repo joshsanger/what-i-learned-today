@@ -38,6 +38,8 @@ try {
 
 
     // LOCAL CODE
+    $month = date('M', strtotime('2019-09-16'));
+    $day   = date('d', strtotime('2019-09-16'));
     $response['data'] = array(
         [
             'color' => '#ca9283',

@@ -2,6 +2,7 @@ import React, {Component, Fragment} from 'react';
 import Top from "./Top";
 import Learn from "./Learn";
 import Footer from "./Footer";
+import Swipe from 'react-easy-swipe';
 
 class App extends Component {
 
@@ -60,7 +61,7 @@ class App extends Component {
                 currentItem: (data.data.length - 1),
                 left: (data.data.length > 1),
                 right: false
-            })
+            });
 
         } catch (e) {
 
@@ -90,27 +91,54 @@ class App extends Component {
         this.fetchData();
     }
 
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (prevProps.currentItem != this.state.currentItem) {
+            document.querySelector('meta[name="theme-color"]').setAttribute('content', this.state.data[this.state.currentItem].color);
+        }
+    }
+
+
     render() {
         if (this.state.fetching) {
             return (
-                <div id="color-wrap" style={{background: '#ffffff'}}>
-
+                <div>
+                    <div id="color-wrap" style={{background: '#ffffff'}}></div>
                 </div>
             );
         }
+
+        if (this.state.error) {
+            return (
+                // todo: handle errors
+                <div>
+
+                </div>
+            )
+        }
+
 
         const current = this.state.data[this.state.currentItem];
 
         console.log(this.state);
 
         return (
-            <Fragment>
+            <Swipe
+                onSwipeRight={() => {
+                    if (this.state.left) {
+                        this.switchItems('left');
+                    }
+                }}
+                onSwipeLeft={() => {
+                    if (this.state.right) {
+                        this.switchItems('right');
+                    }
+                }}>
                 <div id="color-wrap" style={{background: ((current && current.color) ? current.color : '#8393ca')}}>
                     <Top data={current} switchItems={(direction) => {this.switchItems(direction)}} left={this.state.left} right={this.state.right}/>
                     <Learn data={current} />
                 </div>
                 <Footer />
-            </Fragment>
+            </Swipe>
         );
     }
 }

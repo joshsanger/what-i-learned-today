@@ -7,7 +7,6 @@ import { createStore} from 'redux';
 import './styles/styles.less';
 import App from './components/App';
 import reducer from './store/reducer';
-import { BrowserRouter } from 'react-router-dom';
 
 const store = createStore(
     reducer,
@@ -15,6 +14,7 @@ const store = createStore(
 );
 
 const app = (
+
     <Provider store={store}>
         <App />
     </Provider>
