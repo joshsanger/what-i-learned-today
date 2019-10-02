@@ -1,4 +1,5 @@
 import React, {Component, Fragment} from 'react';
+import {Swipeable} from 'react-swipeable'
 import Top from "./Top";
 import Learn from "./Learn";
 import Footer from "./Footer";
@@ -122,13 +123,13 @@ class App extends Component {
         console.log(this.state);
 
         return (
-            <Swipe
-                onSwipeRight={() => {
+            <Swipeable
+                onSwipedRight={() => {
                     if (this.state.left) {
                         this.switchItems('left');
                     }
                 }}
-                onSwipeLeft={() => {
+                onSwipedLeft={() => {
                     if (this.state.right) {
                         this.switchItems('right');
                     }
@@ -138,7 +139,7 @@ class App extends Component {
                     <Learn data={current} />
                 </div>
                 <Footer />
-            </Swipe>
+            </Swipeable>
         );
     }
 }
